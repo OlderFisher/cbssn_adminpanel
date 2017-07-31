@@ -1,0 +1,208 @@
+.header-custom {
+    width: 100%;
+    height: 90px;
+    align-items: center;
+    background-color: #0055A6;
+    color : #FFFFFF;
+    margin-bottom: 50px;
+    display: flex;
+}
+.header-heading {
+    display : block;
+    margin: 0 0 0 20px ;
+}
+
+.panel-heading{
+    color: #0055A6;
+    font-weight: bold;
+    padding-left: 0px;
+    display: flex;
+}
+
+.zip-finder {
+    display: flex;
+    padding-right: 0;
+}
+
+#findZipCodeIdInput {
+    width: 90px;
+    height: 34px;
+    border:1px solid #0055A6;
+    background-color: white;
+    color: #0055A6;
+    font-size: 1.0em;
+    font-weight: normal;
+}
+
+.btn-submit {
+    height: 34px; !important ;
+    width: 80px; !important;
+    background-color: #0055A6;!important;
+    color: #FFFFFF; !important;
+    border-radius: 0px;
+    border: 1px solid #0055A6;
+}
+
+
+.asp-list-container {
+    max-width: 40% ;
+    margin-left: 3%;
+}
+
+.db-list-container {
+    max-width: 40% ;
+    margin-left: 1%;
+
+}
+
+table {
+    font-size: 1.0em;
+}
+
+th {
+    text-align: center;
+    background-color: #0055A6;
+    color : #FFFFFF;
+    border : #5bc0de;
+}
+
+td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid 1px #0055A6;
+}
+
+.tdname.tdkey {
+    padding-left: 10px;
+   }
+.tdnum,.tdchannel,.tdbutton {
+    text-align: center;
+}
+
+
+.btn-default {
+    width:100px ;
+    border-color:#0055A6 ;
+    color : #0055A6;
+}
+
+.btn-default:hover {
+    background-color: #0055A6;
+    color: #FFFFFF;
+}
+
+.tdbutton {
+    cursor: pointer;
+}
+
+/* Modal window styles -----------------------------------------------------              */
+
+#modal_form {
+    width: 350px;
+    height: 300px; /* Рaзмеры дoлжны быть фиксирoвaны */
+    border-radius: 5px;
+    border: 1px #000 solid;
+    background:#FFFFFF;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed; /* чтoбы oкнo былo в видимoй зoне в любoм месте */
+    top: 45%; /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
+    left: 50%; /* пoлoвинa экрaнa слевa */
+    margin-top: -150px;
+    margin-left: -150px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
+    display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
+    opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
+    z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
+    padding: 10px;
+}
+/* Кнoпкa зaкрыть для тех ктo в тaнке) */
+#modal_form #modal_close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+    display: block;
+}
+/* Пoдлoжкa */
+#overlay {
+    z-index:3; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+    position:fixed; /* всегдa перекрывaет весь сaйт */
+    background-color:#000; /* чернaя */
+    opacity:0.8; /* нo немнoгo прoзрaчнa */
+    -moz-opacity:0.8; /* фикс прозрачности для старых браузеров */
+    filter:alpha(opacity=80);
+    width:100%;
+    height:100%; /* рaзмерoм вo весь экрaн */
+    top:0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+    left:0;
+    cursor:pointer;
+    display:none; /* в oбычнoм сoстoянии её нет) */
+}
+.modal-header {
+    align-content: center;
+    background-color: #0055A6;
+    color: #FFFFFF;
+    display: flex;
+    height: 15%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.modal-header-text {
+    display: block;
+    height: 60% ;
+    padding-left: 15px;
+    font-size: 16px;
+}
+.modal-text {
+    text-align: center;
+}
+.operator_name {
+    color : #0055A6;
+    font-size: 1.1em;
+    font-weight : bold ;
+    padding-top: 0px;
+}
+
+.modal-confirm {
+    display: flex;
+    justify-content: space-around;
+}
+
+.url_edit {
+    width: 100%;
+}
+#urledit {
+    width: 100%;
+    font-size: 0.9em;
+    visibility: hidden;
+}
+
+/*----------------  end of modal window styles ---------------------------*/
+
+.admin-exit {
+    margin-left: auto ;
+}
+.user_output {
+    display:inline-flex;
+    margin-right: 40px;
+}
+.logout-admin-link {
+    color : #FFFFFF;
+    text-decoration: none;
+    margin-right: 40px;
+}
+.logout-admin-link:hover {
+    color: #b6b6b6;
+    text-decoration: none;
+}
+.logout-admin-link:link {
+    color : #FFFFFF;
+    text-decoration: none;
+}
+.logout-admin-link:visited {
+    color : #FFFFFF;
+    text-decoration: none;
+}

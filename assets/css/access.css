@@ -1,0 +1,47 @@
+/* ---------- Styles for Access panel --------------------*/
+
+
+.access-header {
+    height: 200px;
+}
+
+.panel-access {
+    width:500px;
+    height: 235px;
+    margin: auto;
+    border-color: #0055A6;
+
+}
+
+.panel-default>.panel-heading {
+    background-color: #0055A6;
+    color: #FFFFFF;
+    border-color: #0055A6;
+    padding-left: 15px;
+}
+
+#access_alert {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.control-label {
+    color: #0055A6;
+    font-size: 1.1em;
+}
+
+.form-control {
+    border-color: #0055A6;
+}
+
+.btn-default {
+    width:50%;
+    background-color: #0055A6;
+    color : #FFFFFF;
+    margin-top: 5px;
+}
+
+.btn-default:hover {
+    background-color: #0055A6;
+    color: rgba(255,255,255,0.9);
+}
