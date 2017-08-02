@@ -99,6 +99,24 @@ class UserSubmit
 		}
 	}
 
+    /**
+     * @return string
+     */
+    public function getUser($currentUser)
+    {
+        $this->user = $currentUser ;
+
+        $this->myQuery = "SELECT * FROM wp_providers_users WHERE name='{$this->user}'"	;
+        $result = $this->mysqli->query($this->myQuery);
+
+
+        if (mysqli_num_rows($result) == 0) {
+            return false ;
+        }
+
+        return true;
+    }
+
     public function dbCloseConnect() {
 
         $this->mysqli->close() ;

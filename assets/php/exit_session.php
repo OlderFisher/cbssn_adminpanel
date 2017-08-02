@@ -6,13 +6,9 @@
  * Time: 14:23
  */
 
-    require_once('Session.php') ;
-    $mySession = new Session() ;
-    $mySession::start() ;
-    $mySession::destroy() ;
-    $mySession::start() ;
+require_once('dbSession.php') ;
+require_once('db_params.php') ;
 
-
-
-
-
+$session = new dbSession($dbHostName,$dbUser,$dbPassword,$dbName) ;
+$session->destroySession() ;
+$session->dbCloseConnect() ;

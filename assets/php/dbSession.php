@@ -54,14 +54,13 @@ class dbSession
      * check current session with user login
      * @return boolean
      */
-    public function checkSession($login)
+    public function checkSession()
     {
-        $this->userLogin = $login ;
-
-        $this->myQuery = "SELECT * FROM wp_providers_session WHERE wp_providers_session.login = '$this->userLogin'";
+        $this->myQuery = "SELECT * FROM wp_providers_session";
         $result = $this->mysqli->query($this->myQuery);
 
         $cntRow = $result->num_rows ; // check session  in db . If yes - not create
+
         if($cntRow > 0) {
             return true ;
         }else {
@@ -71,67 +70,63 @@ class dbSession
     }
 
     /**get current session start_time
-     * @return string
-     */
-    public function getSessionStartTime()
-    {
-        $this->myQuery = "SELECT * FROM wp_providers_session WHERE wp_providers_session.login = '$this->userLogin'";
-        $result = $this->mysqli->query($this->myQuery);
-
-        $cntRow = $result->num_rows ; // check session  in db . If yes - not create
-        if($cntRow > 0) {
-            $returnList = $result->fetch_all(MYSQLI_ASSOC) ;
-            $this->startTime = $returnList[0]['start_time'] ;
-        }else {
-            $this->startTime = 0 ;
-        } ;
-
-        return $this->startTime ;
-    }
-
-    /**get current session start_time
      * @return Unix session time mark
      */
-    public function getSessionTime()
+    public function getSessionUser()
     {
-        $time1 = new DateTime($this->getSessionStartTime()) ;
-        $this->startTime = $time1->getTimestamp() ;
+        $this->myQuery = "SELECT * FROM wp_providers_session";
+        $result = $this->mysqli->query($this->myQuery);
 
-        $time2 = new DateTime();
-        $this->currentTime = $time2->getTimestamp();
+        $returnList = $result->fetch_all() ;
 
-        $this->sessionTime = $this->currentTime - $this->startTime ;
+        $this->userLogin = $returnList[0][1] ;
 
-        /*print_r(PHP_EOL.'Start   tIme :'. $this->startTime.PHP_EOL) ;
-        print_r(PHP_EOL.'Current tIme :'. $this->currentTime.PHP_EOL) ;
-        print_r(PHP_EOL.'Time difference :'.$this->sessionTime.PHP_EOL) ;*/
-
-        return $this->sessionTime ;
+        return $this->userLogin ;
     }
 
+//    /**get current session start_time
+//     * @return string
+//     */
+//    public function getSessionStartTime()
+//    {
+//        $this->myQuery = "SELECT * FROM wp_providers_session WHERE wp_providers_session.login = '$this->userLogin'";
+//        $result = $this->mysqli->query($this->myQuery);
+//
+//        $cntRow = $result->num_rows ; // check session  in db . If yes - not create
+//        if($cntRow > 0) {
+//            $returnList = $result->fetch_all(MYSQLI_ASSOC) ;
+//            $this->startTime = $returnList[0]['start_time'] ;
+//        }else {
+//            $this->startTime = 0 ;
+//        } ;
+//
+//        return $this->startTime ;
+//    }
 
-    /**
-     * @return  session limit in seconds
-     */
-    public function getMyQuery() : int
-    {
-        return 86400 ;
-    }
+//    /**get current session start_time
+//     * @return Unix session time mark
+//     */
+//    public function getSessionTime()
+//    {
+//        $time1 = new DateTime($this->getSessionStartTime()) ;
+//        $this->startTime = $time1->getTimestamp() ;
+//
+//        $time2 = new DateTime();
+//        $this->currentTime = $time2->getTimestamp();
+//
+//        $this->sessionTime = $this->currentTime - $this->startTime ;
+//
+//        return $this->sessionTime ;
+//    }
+
 
     /** set  session with current user
      * @return boolean
      */
 
-    public function setSession()
+    public function setSession($userName)
     {
-
-        $this->myQuery = "SELECT * FROM wp_providers_session WHERE wp_providers_session.login = '$this->userLogin'";
-        $result = $this->mysqli->query($this->myQuery);
-
-        $cntRow = $result->num_rows ; // check provider in db list. If yes - not copy
-        if($cntRow > 0) {
-            return true ;
-        }else {
+            $this->userLogin = $userName ;
             $this->myQuery = "INSERT INTO wp_providers_session (wp_providers_session.login) VALUES ('$this->userLogin') ";
             $result = $this->mysqli->query($this->myQuery);
             if ($result) {
@@ -140,7 +135,7 @@ class dbSession
                 echo "Can not insert session parameters  to the DB : (" . $this->mysqli->errno . ") " . $this->mysqli->error;
                 return false;
             }
-        }
+
     }
 
     /** destroy session with current user
@@ -148,7 +143,7 @@ class dbSession
      */
     public function destroySession()
     {
-        $this->myQuery = "DELETE FROM wp_providers_session WHERE wp_providers_session.key = '$this->userLogin'" ;
+        $this->myQuery = "TRUNCATE TABLE wp_providers_session" ;
         $result = $this->mysqli->query($this->myQuery);
         if ($result) {
             return true;

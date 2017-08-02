@@ -1,12 +1,17 @@
 <?php
-    require_once('assets/php/Session.php') ;
-    $mySession = new Session() ;
-    $mySession::start() ;
 
-        if(!empty($mySession::get('user'))) {
-            header('Location:adminboard.php') ;
-            exit ;
-        }
+    require_once('assets/php/dbSession.php') ;
+    require_once('assets/php/db_params.php') ;
+
+    $session = new dbSession($dbHostName,$dbUser,$dbPassword,$dbName) ;
+    if($session->checkSession()) {
+
+        $session->dbCloseConnect() ;
+        header('Location:adminboard.php') ;
+        exit ;
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -74,10 +79,11 @@
 
 <?php
 
-require_once('assets/php/UserSubmit.php');
-require_once('assets/php/db_params.php') ;
-
 if (isset($_POST['submit'])) {
+
+    require_once('assets/php/UserSubmit.php');
+    require_once('assets/php/db_params.php') ;
+
 
     $currentUser = $_POST['login'];
     $currentPass = MD5($_POST['password']);
@@ -91,8 +97,12 @@ if (isset($_POST['submit'])) {
     } else {
         $enter = true;
         echo "<script>"."document.getElementById('access_alert').style.color= '#FFFFFF';"."</script>";
-        $_SESSION['user'] = $currentUser ;
-        echo "<HTML><HEAD><META HTTP-EQUIV='Refresh' CONTENT='0; URL=adminboard.php'></HEAD></HTML>";
+
+        $session->setSession($currentUser) ;
+        $session->dbCloseConnect() ;
+
+
+       echo "<HTML><HEAD><META HTTP-EQUIV='Refresh' CONTENT='0; URL=adminboard.php'></HEAD></HTML>";
     }
 }
-?>
+?> 

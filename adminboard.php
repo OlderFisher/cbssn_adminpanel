@@ -1,14 +1,16 @@
 <?php
 
-require_once('assets/php/Session.php') ;
+require_once('assets/php/dbSession.php') ;
+require_once('assets/php/db_params.php') ;
 
-$mySession = new Session() ;
-$mySession::start() ;
+$session = new dbSession($dbHostName,$dbUser,$dbPassword,$dbName) ;
 
-if($mySession::get('user') != null) {
-     $currentUser = $mySession::get('user') ;
+if($session->checkSession()) {
+    $currentUser = $session->getSessionUser() ;
+    $session->dbCloseConnect();
 }else {
-    header('Location:index.php') ;
+
+    header('Location:adminboard.php') ;
     exit ;
 }
 
